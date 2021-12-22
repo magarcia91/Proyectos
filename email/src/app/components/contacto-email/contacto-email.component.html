@@ -1,0 +1,32 @@
+<html>    
+    <body>
+        <main>
+            <div class='card'>
+                <div class='info'>
+                    <h1 class='title' style="text-align: center;">Generar email</h1>
+                    <form>
+                        <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="name" required [(ngModel)]="email.nombre" name="nombre">
+                        <br/><br/>          
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" id="email" required [(ngModel)]="email.email" name="email">
+                        <br/><br/>          
+                        <label for="mensaje">Mensaje:</label>
+                        <input type="text" class="form-control" id="mensaje" required [(ngModel)]="email.mensaje" name="mensaje">                               
+                        </div> 
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" (click)="reset()">Limpiar</button> 
+                            <br/><br/>                                               
+                            <button type="button" class="btn btn-primary" (click)="sendEmail()">Contactar</button>
+                        </div>                                                      
+                    </form>                                               
+                </div>                
+            </div> 
+            <br/> 
+            <!-- <button type="button" class="btn btn-primary" (click)="goToHome()">Regresar a Inicio</button>               -->
+        </main>
+    </body>
+ </html>
+
+ 

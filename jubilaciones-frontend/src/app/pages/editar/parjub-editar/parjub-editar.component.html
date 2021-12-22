@@ -1,0 +1,33 @@
+<br>
+<h1 style="text-align: center;">Actualizar Datos Inscripcion</h1>
+<div style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Tipo Jubilacion</label>
+      <input type="text" class="form-control" id="partipojubilacion" required [(ngModel)]="parjub.partipojubilacion" name="partipojubilacion">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Tipo Discapacidad</label>
+      <input type="text" class="form-control" id="partipodiscapacidad" required [(ngModel)]="parjub.partipodiscapacidad" name="partipodiscapacidad">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Edad</label>
+      <input type="text" class="form-control" id="paredad" required [(ngModel)]="parjub.paredad" name="paredad">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Tiempo Servicio</label>
+      <input type="text" class="form-control" id="partiemposervicio" required [(ngModel)]="parjub.partiemposervicio" name="partiemposervicio">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Min Aportaciones</label>
+      <input type="text" class="form-control" id="parminaportaciones" required [(ngModel)]="parjub.parminaportaciones" name="parminaportaciones">
+    </div>
+    
+
+    <button type="submit" class="btn btn-success">Actualizar</button>
+  </form>
+</div>

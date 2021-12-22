@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">    
+    <mat-toolbar-row>  
+        <button mat-icon-button>
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button>  
+      <h1>TITULACIÓN BACHILLERES</h1>
+      <span class="menu-spacer"></span>    
+    </mat-toolbar-row>   
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>  
+        <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+            <mat-expansion-panel-header>
+                <strong>PARAMETROS TIT</strong>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+                <a mat-list-item [routerLink]="'listar'"><mat-icon>event</mat-icon>FECHAS TITULACIÓN</a>
+                <a mat-list-item [routerLink]="'listarModelo'"><mat-icon>list</mat-icon>PONDERACIÓN</a>
+            </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+            <mat-expansion-panel-header>
+                <strong>DICCIONARIO</strong>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+                <a mat-list-item [routerLink]="'/'"><mat-icon>attach_file</mat-icon>LÍNEA GRÁFICA</a>                
+            </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+            <mat-expansion-panel-header>
+                <strong>CONSEJO EJECUTIVO</strong>
+            </mat-expansion-panel-header>
+            <mat-nav-list dense>
+                <a mat-list-item [routerLink]="'/'"><mat-icon>list</mat-icon>DETALLE CONSEJO EJECUTIVO</a>
+                <a mat-list-item [routerLink]="'/'"><mat-icon>create</mat-icon>INGRESO CALIFICACIONES</a>                  
+            </mat-nav-list>
+        </mat-expansion-panel>            
+        <a mat-list-item (click)="sidenav.toggle()" href="/" mat-list-item><strong>CERRAR</strong></a>  
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 88vh;">  
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+<!-- <app-ponderacion-titulacion></app-ponderacion-titulacion> -->

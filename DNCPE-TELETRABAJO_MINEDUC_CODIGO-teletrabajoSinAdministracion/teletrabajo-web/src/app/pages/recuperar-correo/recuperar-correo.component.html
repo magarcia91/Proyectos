@@ -1,0 +1,50 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+     <!-- Icon -->
+     <div class="fadeIn first">
+      <img src="./assets/img/logo_mineduc_2.png" id="icon" alt="User Icon" />
+    </div>
+
+    <div class="text-title">
+      Recuperación de correo electrónico
+    </div>
+
+    <div id="formFooter">
+      <div class="alert-info" align="left">
+        <small>
+      <span><b>Considere:</b>
+        <li>Ingresar el número de identificación o cédula. <i>Ejemplo: 1234567890</i></li>
+        <li>Ingresar el año de nacimiento. <i>Ejemplo: 1971</i></li>
+        <li>Ingresar el año de expedición de su cédula de identidad. <i>Ejemplo: 2015</i></li>        
+        <li>Ingresar un correo electrónico al que llegará una contraseña provisional para que posteriormente pueda actualizarla.. <i>Ejemplo: correo@gmail.com</i></li>        
+      </span></small>
+    </div>
+    </div>
+<br/>
+    
+    <!-- Form -->
+    <form name="formRecuperar" role="form"  novalidate>
+      <input type="text" id="identificacion" class="fadeIn second" name="identificacion" placeholder="Número de identificación o cédula" [(ngModel)]="identificacion" maxlength="10" >      
+      <input type="number" id="anio" class="fadeIn second" name="anio" placeholder="Año de nacimiento" [(ngModel)]="anio" max="9999" maxlength="4">       
+      <input type="number" id="expedicion" class="fadeIn second" name="expedicion" placeholder="Año de expedición de la cédula de identidad" [(ngModel)]="anioExpedicion" max="9999" maxlength="4">       
+      <input type="text" id="correo" class="fadeIn second" name="correo" placeholder="Correo electrónico personal para la solicitud" [(ngModel)]="correo" maxlength="50">     
+      <div align="center">
+        <img src="{{urlCaptcha}}" width="150">       
+        <input type="button" class="fadeIn fourth" value="Cambiar imagen" (click)="refresh()" style="padding: 5px !important;
+        margin-left: 5px !important;
+        margin-bottom: 5px !important;
+        text-transform: initial !important">        
+        <input type="text" name="textImagenCaptcha"  class="fadeIn third"  placeholder="Ingrese el texto de la imagen"
+        [(ngModel)]="textoImagenCaptcha" maxlength="6">
+        
+        <br/>
+        <br/>
+      </div>
+      <input type="submit" class="fadeIn fourth" value="Enviar solicitud" (click)="enviarCaptchaYSolicitud()">
+    </form>
+    
+  </div>
+</div>
+

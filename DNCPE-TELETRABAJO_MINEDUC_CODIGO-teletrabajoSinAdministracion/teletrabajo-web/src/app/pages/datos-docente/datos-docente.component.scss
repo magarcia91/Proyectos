@@ -1,0 +1,29 @@
+.label-material{
+    color: rgba(0,0,0,.54);
+    position: absolute;
+    left: 0;
+    font: inherit;
+    pointer-events: none;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transform-origin: 0 0;
+    font-size: 11px;
+    padding-left: 10px;
+}
+.form-check, label {
+    color: rgba(0,0,0,.87) !important;
+}
+.mat-checkbox-label{
+    color: rgba(0,0,0,.87) !important;
+}
+.margin-div-asignatura{
+    margin-left: 10px;
+}
+.style-label-check{
+    font-size: 12px;
+    font-weight: 600;
+    color:#AAAAAA !important;
+}
+

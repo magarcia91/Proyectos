@@ -1,0 +1,40 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="./assets/img/logo_mineduc_2.png" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form >
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario" [(ngModel)]="usuario" maxlength="10" minlength="8">      
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña" [(ngModel)]="pass">
+      <div align="center">
+        <img src="{{urlCaptcha}}" width="150">       
+        <input type="button" class="fadeIn fourth" value="Cambiar imagen" (click)="refresh()" style="padding: 5px !important;
+        margin-left: 5px !important;
+        margin-bottom: 5px !important;
+        text-transform: initial !important">        
+        <input type="text" name="textImagenCaptcha"  class="fadeIn third"  placeholder="Ingrese el texto de la imagen"
+        [(ngModel)]="textoImagenCaptcha" maxlength="6">
+        
+        <br/>
+        <br/>
+      </div>
+      <input type="submit" class="fadeIn fourth" value="Ingresar" (click)="onSubmit()">
+      <a [routerLink]="['/recuperarClave']">¿Has olvidado tu contraseña?</a>
+    </form>
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <div align="left">
+        <small>
+      <span><strong>Las credenciales de acceso al sistema por primera vez son:
+        <li>Usuario: número de cédula (Ejemplo: 1234567890)</li>
+        <li>Contraseña: número de cédula seguido del año de nacimiento, sin espacios ni caracteres especiales (Ejemplo:12345678901984)</li>
+      </strong></span></small>
+    </div>
+    </div>
+  </div>
+</div>

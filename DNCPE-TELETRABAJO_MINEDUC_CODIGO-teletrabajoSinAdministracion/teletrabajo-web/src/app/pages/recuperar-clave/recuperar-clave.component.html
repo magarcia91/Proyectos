@@ -1,0 +1,49 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+     <!-- Icon -->
+     <div class="fadeIn first">
+      <img src="./assets/img/logo_mineduc_2.png" id="icon" alt="User Icon" />
+    </div>
+
+    <div class="text-title">
+      Recuperación de contraseña
+    </div>
+
+    <div id="formFooter">
+      <div class="alert-info" align="left">
+        <small>
+      <span><b>Considere:</b>
+        <li>Ingresar el número de identificación o cédula. <i>Ejemplo: 1234567890</i></li>
+        <li>Ingresar el año de nacimiento. <i>Ejemplo: 1971</i></li>
+        <li>Seleccionar el tipo de correo electrónico que usará el sistema para el envío de la petición.</li>
+        <li>Ingresar el correo electrónico registrado en la plataforma, tomando en consideración el tipo de correo elegido en el punto anterior. <i>Ejemplo: correo@gmail.com</i></li>
+        <li>Una vez validada la información, el sistema enviará al correo electrónico proporcionado una contraseña provisional para posteriormente pueda actualizarla.</li>
+        <li><b>Importante: Si olvidó su correo electrónico institucional y correo electrónico personal, el sistema le permitirá recuperar su cuenta en el siguiente link: </b> <a [routerLink]="['/recuperarCorreo']" style="color: #CC6600;">Recuperar mi correo electrónico personal</a></li>
+      </span></small>
+    </div>
+    </div>
+<br/>
+    
+    <!-- Form -->
+    <form name="formRecuperar" role="form"  novalidate>
+      <input type="text" id="identificacion" class="fadeIn second" name="identificacion" placeholder="Número de identificación o cédula" [(ngModel)]="identificacion" maxlength="10" >      
+      <input type="number" id="anio" class="fadeIn second" name="anio" placeholder="Año de nacimiento" [(ngModel)]="anio" max="9999" maxlength="4">       
+      <mat-form-field class="input-select">
+        <mat-label>Tipo de correo electrónico para la petición</mat-label>
+        <mat-select
+        id="cmbPeticion"
+        name="cmbPeticion"
+        [(ngModel)]="opcionPeticionSeleccionada">
+        <mat-option *ngFor="let opcion of opcionesPeticion" [value]="opcion.id">
+          {{opcion.text}}
+        </mat-option>
+        </mat-select>       
+      </mat-form-field>
+      <input type="text" id="correo" class="fadeIn second" name="correo" placeholder="Correo electrónico" [(ngModel)]="correo" maxlength="50">     
+      <input type="submit" class="fadeIn fourth" value="Enviar solicitud" (click)="enviarSolicitud()">
+    </form>
+    
+  </div>
+</div>

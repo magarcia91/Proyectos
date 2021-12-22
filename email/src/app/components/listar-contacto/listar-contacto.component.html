@@ -1,0 +1,25 @@
+<html>
+    <body>
+        <br/>
+        <button type="button" class="btn btn-primary" (click) ="listEmail()">Mostrar Contactos</button>
+        <br/><br/> 
+        <table class="center">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Mensaje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor ="let e of email">
+            <td>{{e.nombre}}</td>
+            <td>{{e.email}}</td>
+            <td>{{e.mensaje}}</td>
+        </tr>      
+        </tbody>
+        </table>
+    </body>
+</html>
+
+

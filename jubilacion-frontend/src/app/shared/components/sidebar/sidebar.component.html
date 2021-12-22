@@ -1,0 +1,19 @@
+
+<ng-container *ngFor="let item of menuArray">
+    <!-- Handle main menu items here -->
+    <ng-container *ngIf="item.recursosHijos && item.recursosHijos.length > 0">
+      <button mat-button [matMenuTriggerFor]="menu.childMenu" [routerLink]="item.url">
+        <mat-icon>menu_open</mat-icon>
+        {{item.nombre}}
+      </button>
+      <app-menu-item #menu [items]="item.recursosHijos"></app-menu-item>
+    </ng-container>
+    <!-- Leaf sub menu items here -->
+    <ng-container *ngIf="!item.recursosHijos || item.recursosHijos.length === 0">
+      <button mat-button color="primary" [routerLink]="item.url">
+        <mat-icon>drag_handle</mat-icon>
+        {{item.nombre}}
+      </button>
+    </ng-container>
+  </ng-container>
+  

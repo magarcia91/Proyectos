@@ -1,0 +1,30 @@
+<mat-dialog-content >
+<div class="card">
+  <div class="alert alert-success">
+    <span>
+      <h4>Registro Actividad Semana: {{registro.fechaInicio | date : 'dd/MM/yyyy'}} - {{registro.fechaFin | date : 'dd/MM/yyyy'}}</h4>
+    </span>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <section class="example-section">
+          <mat-checkbox class="example-margin" (change)="checkChangeAll($event)"><strong>Seleccionar todas las actividades</strong></mat-checkbox>
+        </section>
+      </div>
+    </div>
+    
+      <div class="row" *ngFor="let actividad of actividades">
+        <div class="col">
+          <section class="example-section">
+            <mat-checkbox class="example-margin" (change)="checkChange($event, actividad)" [checked]="actividad.check">{{actividad.nombre}}</mat-checkbox>
+          </section>
+        </div>
+      </div>
+  </div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" class="btn btn-success btn-round" (click)="save()">Guardar</button>
+              <button type="button" mat-button (click)="dialogRef.close()" class="btn btn-danger btn-round">Cancelar</button>
+</mat-dialog-actions>

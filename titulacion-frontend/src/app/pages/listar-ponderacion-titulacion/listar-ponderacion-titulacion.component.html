@@ -1,0 +1,140 @@
+
+<form [formGroup]="ponderacionForm">
+<br>
+  <h1 style="margin-left: 622px;">Detalle Ponderación Titulación</h1>
+<div class="container"> 
+<div> 
+    <button mat-raised-button (click)="create()" class="button">Nuevo</button> 
+</div>
+<br>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+  <ng-container matColumnDef="mcaCodigo">
+    <th mat-header-cell *matHeaderCellDef> Nro. </th>
+    <td mat-cell *matCellDef="let element"> {{element.mcaCodigo}} </td>
+  </ng-container>
+  
+    <ng-container matColumnDef="mcaDenominacion">
+      <th mat-header-cell *matHeaderCellDef> Denominación </th>
+      <td mat-cell *matCellDef="let element"> {{element.mcaDenominacion}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="mcaPorcentaje">
+        <th mat-header-cell *matHeaderCellDef> Porcentaje </th>
+        <td mat-cell *matCellDef="let element"> {{element.mcaPorcentaje}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="mcaDesde">
+        <th mat-header-cell *matHeaderCellDef> Rango Nota_MIN </th>
+        <td mat-cell *matCellDef="let element"> {{element.mcaDesde}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mcaHasta">
+        <th mat-header-cell *matHeaderCellDef> Rango Nota_MAX </th>
+        <td mat-cell *matCellDef="let element"> {{element.mcaHasta}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mcaEstado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.mcaEstado}} </td>
+      </ng-container>
+  
+       <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="accent" (click)="update(element)">
+              <mat-icon class="mat-18" style="color: brown;">system_update</mat-icon><span style="color: brown;">Editar</span>
+          </button>
+        </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+ <!-- <br>
+  <mat-form-field>
+    <mat-label>Régimen</mat-label>
+    <mat-select formControlName="codRegAniLec" (selectionChange)="obtenerAnioLectivo()">
+      <mat-option *ngFor="let anioLectivoSeleccionada of listaAnioLectivo | async"
+      [value]="anioLectivoSeleccionada.codigo">
+          {{anioLectivoSeleccionada.descripcion +" " + anioLectivoSeleccionada.anioInicio+"-"+anioLectivoSeleccionada.anioFin}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+<br>
+  <mat-form-field>
+      <mat-label>Tipo Educación</mat-label>
+      <mat-select formControlName="codTipoEducacion">
+        <mat-option *ngFor="let tipoEducacionSeleccionada of listaTipoEducacion | async"
+        [value]="tipoEducacionSeleccionada.codigo">
+            {{tipoEducacionSeleccionada.descripcion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br><br>
+    <div> 
+      <button mat-raised-button [routerLink]="['/guardarModeloCalificacion']" class="button">Nuevo</button> 
+   </div>
+</div>
+</form> -->
+  
+ <!--  <ng-container matColumnDef="listaAnioLectivo">
+    <th mat-header-cell *matHeaderCellDef> Régimen </th>
+    <td mat-cell *matCellDef="let element"> {{element.listaAnioLectivo}} </td>
+  </ng-container> 
+
+    <ng-container matColumnDef="listaTipoEducacion">
+      <th mat-header-cell *matHeaderCellDef> Año Lectivo </th>
+      <td mat-cell *matCellDef="let element"> {{element.listaTipoEducacion}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="listaAnioLectivo">
+      <th mat-header-cell *matHeaderCellDef> Tipo Educación</th>
+      <td mat-cell *matCellDef="let element"> {{element.listaAnioLectivo}} </td>
+    </ng-container>-->
+
+  <!--<br>
+  <div class="panel panel-default">  
+      <div class="panel-heading">  
+          <h1 style="text-align: center">Datos de Inscripciones</h1>      
+      <div class="panel-body" align="center">  
+          <table class="table table-hover table-sm">  
+              <thead class="thead-light">  
+                  <tr>  
+                      <th>Cod</th> 
+                      <th>Tipo Jubilacion</th>  
+                      <th>Tipo Discapacidad</th>
+                      <th>Edad</th>  
+                      <th>Tiempo Servicio</th>
+                      <th>Min Aportaciones</th>
+                      <th>Acciones</th>  
+                        
+                  </tr>  
+              </thead>  
+              <tbody>  
+                   <tr *ngFor="let pj of parJub "> 
+                      <td>{{pj.parcod}}</td>  
+                      <td>{{pj.partipojubilacion}}</td>  
+                      <td>{{pj.partipodiscapacidad}}</td>  
+                      <td>{{pj.paredad}}</td> 
+                      <td>{{pj.partiemposervicio}}</td> 
+                      <td>{{pj.parminaportaciones}}</td>  
+                      <td>                        
+                        <button class="btn btn-info" [routerLink] = "['/jubilaciones/modificar/'+ pj.parcod]">Actualizar</button>
+                      </td>               
+                    </tr>   
+              </tbody>  
+          </table>  
+      </div>  
+    </div>-->
+  
+    
+      
+    
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,74 @@
+<form [formGroup]="formularioClave" novalidate (ngSubmit)="crearClave(formularioClave)">
+  <div class="main-content">
+    <div class="container-fluid">            
+
+      <div class="card">        
+        <div class="alert alert-success">
+          <h4>Actualizaci&#243;n de contrase&#241;a</h4>
+          <small> Los campos con * son obligatorios</small>
+        </div>
+        <div class="card-body" style="padding: 0px;"> 
+          <div class="ibox-heading">
+          <div class="alert-info">
+            <b><span>Estimado usuario, tomar en cuenta las siguientes indicaciones para la creaci&#243;n de contrase&#241;a. Recuerde generar una contrase&#241;a segura utilizando los siguientes tips:</span></b><br />
+            <img src="./assets/img/lock_closed.png" height="40px"/>         
+            <ul>
+              <li>La contrase&#241;a<b>&#32;debe&#32;</b> tener al menos una longitud de 8 caracteres.</li>
+              <li>La contrase&#241;a<b>&#32;debe&#32;</b> contener por lo menos una letra may&#250;scula, min&#250;scula, 2 n&#250;meros y un s&#237;mbolo especial (! @ $ . * …).</li>
+            </ul>
+            <img src="./assets/img/lock_open.png"  height="40px"/>         
+            <ul>
+              <li>La contrase&#241;a<b>&#32;no debe&#32;</b> contener datos f&#225;ciles de adivinar por ejemplo:  nombres propios, fechas de nacimiento, nombres de miembros de la familia, nombres de mascotas, ciudades, equipos de f&#250;tbol, …</li>
+              <li>La contrase&#241;a<b>&#32;no debe&#32;</b> contener letras  o  n&#250;meros  secuenciales por ejemplo: 1234, 9876, abcd, wxyz.</li>
+            </ul>
+          </div>
+        </div>    
+        <br/>      
+<div class="row" style="padding-bottom: 10px;">
+  <div class="col-lg-3"></div>
+  <div class="col ">
+    <div class="row">            
+      <div class="col">
+        <mat-form-field class="full-width">   
+          <input matInput id="clave" 
+          name="clave"
+          formControlName="clave" 
+          type="password"              
+          placeholder="*Contraseña:" maxlength="15" minlength="8">
+          <mat-error *ngFor="let validation of mensajes_validacion_formulario.clave">
+            <mat-error class="error-message" *ngIf="formularioClave.get('clave').hasError(validation.type) && (formularioClave.get('clave').dirty || formularioClave.get('clave').touched || formularioClave.get('clave').invalid)">{{validation.message}}</mat-error>
+          </mat-error>                         
+        </mat-form-field>        
+      </div>                                  
+    </div>
+    <br/>
+    <div class="row">            
+      <div class="col">
+        <mat-form-field class="full-width">              
+          <input matInput id="confirmarClave" 
+          name="confirmarClave"
+          formControlName="confirmarClave" 
+          type="password"              
+          placeholder="*Confirmar contraseña:" maxlength="15" minlength="8"> 
+          <mat-error *ngFor="let validation of mensajes_validacion_formulario.confirmarClave">
+            <mat-error class="error-message" *ngIf="formularioClave.get('confirmarClave').hasError(validation.type) && (formularioClave.get('confirmarClave').dirty || formularioClave.get('confirmarClave').touched || formularioClave.get('confirmarClave').invalid)">{{validation.message}}</mat-error>
+          </mat-error> 
+        </mat-form-field>
+      </div>             
+    </div>
+  </div>
+  <div class="col-lg-3"></div>
+</div>              
+        </div>
+  
+        <br />
+      </div>
+  
+      <div style="text-align: center;">
+        <button mat-button type="submit" class="btn btn-success btn-round" >Guardar contraseña</button>      
+      </div>
+  
+    </div>
+  
+  </div>
+  </form>

@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">    
+    <mat-toolbar-row>  
+        <button mat-icon-button>
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button>  
+      <h1>Sistema de Inscripción Jubilaciones</h1>
+      <span class="menu-spacer"></span>    
+    </mat-toolbar-row>   
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <mat-nav-list> 
+        <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+          <mat-expansion-panel-header>
+              <strong>INSCRIPCIONES</strong>
+          </mat-expansion-panel-header>
+          <mat-nav-list dense>
+              <a mat-list-item [routerLink]="'/jubilaciones/listar'"><mat-icon>list</mat-icon>Detalle Inscripciones</a>
+              <a mat-list-item [routerLink]="'/jubilaciones/registrar'"><mat-icon>create</mat-icon>Registrar Inscripciones</a>
+           </mat-nav-list>
+      </mat-expansion-panel>      
+      <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+        <mat-expansion-panel-header>
+            <strong>DESVINCULACIONES</strong>
+        </mat-expansion-panel-header>
+        <mat-nav-list dense>
+            <a mat-list-item [routerLink]="'/jubilaciones/listar'"><mat-icon>list</mat-icon>Detalle Desvinculaciones</a>
+            <a mat-list-item [routerLink]="'/jubilaciones/registrar'"><mat-icon>create</mat-icon>Registrar Desvinculación<nav></nav></a>
+         </mat-nav-list>
+      </mat-expansion-panel>  
+      <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+        <mat-expansion-panel-header>
+            <strong>PAGOS</strong>
+        </mat-expansion-panel-header>
+        <mat-nav-list dense>
+            <a mat-list-item [routerLink]="'/jubilaciones/listar'"><mat-icon>list</mat-icon>Detalle Pagos</a>
+            <a mat-list-item [routerLink]="'/jubilaciones/registrar'"><mat-icon>attach_money</mat-icon>Registrar Pago</a>
+         </mat-nav-list>
+    </mat-expansion-panel>      
+      <a mat-list-item (click)="sidenav.toggle()" href="/" mat-list-item><strong>Cerrar</strong></a>   
+      </mat-nav-list>  
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 88vh;">  
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

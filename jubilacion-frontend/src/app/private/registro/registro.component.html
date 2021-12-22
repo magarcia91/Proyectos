@@ -1,0 +1,374 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <mat-card>
+                <mat-card-header>
+                    
+                    <mat-card-title>Registro de Asistencia</mat-card-title>
+                    <mat-card-subtitle>*campos requeridos</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]=frmRegistroAsistencia>
+                        <div class="row">
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                        <div class="col-sm-3" style="margin-top: 1%;">
+                                        <h3>Documento de Identificación:</h3>
+                                        </div>
+                                        <div class="col-sm-4" >
+                                        <mat-form-field  appearance="outline" class="width-select">
+                                            <mat-label>
+                                                Identificación
+                                            </mat-label>
+                                            <input matInput style="text-align: center;" maxlength="10" (blur)="buscarCedula()"
+                                            formControlName="documentoIdentidad" name="documento" DirectivaNumeros>
+                                          </mat-form-field>
+    
+                                          <button mat-icon-button (click)="buscarCedula()">
+                                            <mat-icon>search</mat-icon>
+                                          </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                        <div class="col-sm-3" style="margin-top: 1%;">
+                                            <h3>*Nombre:</h3>
+                                            </div>
+                                            <div class="col-sm-3">
+                                        <mat-form-field  appearance="outline" class="width-select">
+                                            <mat-label>
+                                                Nombre
+                                            </mat-label>
+                                            <input matInput style="text-align: center;" formControlName="nombre" name="documento">
+                                          </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                        <div class="col-sm-3" style="margin-top: 1%;">
+                                            <h3>*Fecha de nacimiento:</h3>
+                                       </div>
+                                       <div class="col-sm-3" >
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Fecha de nacimiento</mat-label>
+                                            <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento"  (dateChange)="calcularEdad($event)">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                            <mat-hint style="margin-left: 70%; font-size: 14px;">{{frmRegistroAsistencia.get("edad").value}}</mat-hint>
+                                        </mat-form-field>
+                                        
+                                       </div>
+                                       
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-sm-12" >
+                                   <div class="row">
+                                    <div class="col-sm-3" >
+                                        <h3>*Género:</h3>
+                                   </div>
+                                   <div class="col-sm-4" >
+                                    
+                                    <mat-radio-group formControlName="genero">
+                                        <mat-radio-button value="1" >Masculino</mat-radio-button>
+                                        <mat-radio-button value="2"  style="margin-left: 10px;">Femenino</mat-radio-button>
+                                    </mat-radio-group>
+                               </div>
+                                   </div>
+                                   
+                                        
+                                </div>
+                                <div class="col-sm-12" >
+                                   <div class="row">
+                                    <div class="col-sm-3" >
+                                        <h3>*Discapacidad:</h3>
+                                   </div>
+                                   <div class="col-sm-4">
+                                    <mat-radio-group formControlName="discapacidad">
+                                        <mat-radio-button value="1">Sí </mat-radio-button>
+                                        <mat-radio-button value="0"  style="margin-left: 10px;">No </mat-radio-button>
+                                    </mat-radio-group>
+                               </div>
+                                   </div>
+                                   
+                                        
+                                </div>
+                                <div class="col-sm-12" >
+                                   <div class="row">
+                                    <div class="col-sm-3" style="margin-top: 1%;">
+                                        <h3>*Nacionalidad:</h3>
+                                   </div>
+                                   <div class="col-sm-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Nacionalidad</mat-label>
+                                        <input type="text"  matInput
+                                         formControlName="nacionalidad" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let nacionalidadSeleccionada  of filteredOptionsNacionalidad | async"
+                                            [value]="nacionalidadSeleccionada.descripcion">
+                                            {{nacionalidadSeleccionada.descripcion}}
+                                          </mat-option>
+                                        </mat-autocomplete> 
+                                      </mat-form-field>
+                               </div>
+                                   </div>
+                                    
+                                </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                     <div class="col-sm-3" style="margin-top: 1%;">
+                                         <h3>Identificación étnica:</h3>
+                                    </div>
+                                    <div class="col-sm-4">
+                                     <mat-form-field appearance="outline">
+                                         <mat-label>Identificación étnica</mat-label>
+                                         <input type="text"  matInput
+                                          formControlName="etnia" [matAutocomplete]="autoEtnia">
+                                         <mat-autocomplete #autoEtnia="matAutocomplete">
+                                             <mat-option *ngFor="let etniaSeleccionada  of filteredOptionEtnias | async"
+                                             [value]="etniaSeleccionada.descripcion">
+                                             {{etniaSeleccionada.descripcion}}
+                                           </mat-option>
+                                         </mat-autocomplete> 
+                                       </mat-form-field>
+                                </div>
+                                    </div>
+                                     
+                                 </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                        <div class="col-sm-3" style="margin-top: 1%;">
+                                            <h3>*Celular:</h3>
+                                       </div>
+                                       <div class="col-sm-4">
+                                        <mat-form-field  appearance="outline" class="width-select">
+                                            <mat-label>
+                                                Celular
+                                            </mat-label>
+                                            <input matInput style="text-align: center;" maxlength="10" formControlName="celular" name="celular" DirectivaNumeros>
+                                          </mat-form-field>
+                                   </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                        <div class="col-sm-3" style="margin-top: 1%;">
+                                            <h3>Dirección Domicilio:</h3>
+                                            </div>
+                                            <div class="col-sm-3">
+                                        <mat-form-field  appearance="outline" class="width-select">
+                                            <mat-label>
+                                                Dirección
+                                            </mat-label>
+                                            <input matInput style="text-align: center;" formControlName="direccion" name="direccion">
+                                          </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                     <div class="col-sm-3" >
+                                         <h3>Se encuentra en situación de movilidad humana?:</h3>
+                                    </div>
+                                    <div class="col-sm-4">
+                                     <mat-radio-group formControlName="movilidad">
+                                         <mat-radio-button value="1">Sí </mat-radio-button>
+                                         <mat-radio-button value="0"  style="margin-left: 10px;">No </mat-radio-button>
+                                     </mat-radio-group>
+                                   </div>
+                                </div>     
+                                 </div>
+                                 <div class="col-sm-12" >
+                                    <div class="row">
+                                     <div class="col-sm-3" >
+                                         <h3>Conectividad en el hogar:</h3>
+                                    </div>
+                                    <div class="col-sm-4">
+                                     <mat-radio-group formControlName="conectividad">
+                                         <mat-radio-button value="1">Sí </mat-radio-button>
+                                         <mat-radio-button value="0"  style="margin-left: 10px;">No </mat-radio-button>
+                                     </mat-radio-group>
+                                   </div>
+                                </div>     
+                                 </div>
+                                 <div class="col-sm-12" >
+                                    <div class="row">
+                                     <div class="col-sm-3" >
+                                         <h3>¿Se ha cambiado de vivienda durante la pandemia?</h3>
+                                    </div>
+                                    <div class="col-sm-4">
+                                     <mat-radio-group formControlName="vivienda">
+                                         <mat-radio-button value="1">Sí </mat-radio-button>
+                                         <mat-radio-button value="0"  style="margin-left: 10px;">No </mat-radio-button>
+                                     </mat-radio-group>
+                                   </div>
+                                </div>     
+                                 </div>
+
+                                 <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h3>
+                                                *Actualmente, ¿Se encuentra matriculado/a en alguna institución educativa
+                                            </h3>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 ">
+                                        <mat-radio-group formControlName="esMatriculado">
+                                            <mat-radio-button value="1">Si</mat-radio-button>
+                                            <mat-radio-button value="2"  style="margin-left: 10px;">No</mat-radio-button>
+                                            <mat-radio-button value="3"  style="margin-left: 10px;">
+                                                <span style=" white-space: normal;">
+                                                Está matriculada/o pero ya no se conecta a clases
+                                            </span>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                               
+                               
+                                <div class="col-sm-12" >
+                                   <div class="row">
+                                    <div class="col-sm-3" style="margin-top: 1%;">
+                                        <h3>*¿En qué grado te encuentras matriculado? O ¿cuál fue el último grado en el que estuviste matriculado?:</h3>
+                                   </div>
+                                   <div class="col-sm-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Grado</mat-label>
+                                        <mat-select formControlName="grado" placeholder="Seleccione un Grado">
+                                            <mat-option *ngFor="let gradoSeleccionado of listaGrados"
+                                            [value]="gradoSeleccionado.codigo">
+                                                {{gradoSeleccionado.nemonico}}
+                                          </mat-option>
+                                        </mat-select>
+                                        
+                                      </mat-form-field>
+                               </div>
+                                   </div>
+                                    
+                                </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                     <div class="col-sm-3" >
+                                         <h3>La institución educativa en la que estás matriculado, ¿queda cerca de tu domicilio?</h3>
+                                    </div>
+                                    <div class="col-sm-4">
+                                     <mat-radio-group formControlName="cercania">
+                                         <mat-radio-button value="1">Sí </mat-radio-button>
+                                         <mat-radio-button value="0"  style="margin-left: 10px;">No </mat-radio-button>
+                                     </mat-radio-group>
+                                   </div>
+                                </div>     
+                                 </div>
+                                 <div class="col-sm-12" >
+                                    <div class="row">
+                                     <div class="col-sm-3" style="margin-top: 1%;">
+                                         <h3>*Sede:</h3>
+                                    </div>
+                                    <div class="col-sm-4" >
+                                     <mat-form-field appearance="outline">
+                                         <mat-label>Sede</mat-label>
+                                       <!--  <mat-select formControlName="sede" placeholder="Seleccione una Sede">
+                                             <mat-option *ngFor="let sedeSeleccionada of listaSedes"
+                                             [value]="sedeSeleccionada.sedCodigo">
+                                             {{sedeSeleccionada.sedNombre}}
+                                           </mat-option>
+                                         </mat-select>-->
+                                         <input type="text"  matInput
+                                          formControlName="sede" [matAutocomplete]="autoSede">
+                                         <mat-autocomplete #autoSede="matAutocomplete">
+                                             <mat-option *ngFor="let sedeSeleccionada  of filteredOptionSedes | async"
+                                             [value]="sedeSeleccionada.sedNombre">
+                                             {{sedeSeleccionada.sedNombre}}
+                                           </mat-option>
+                                         </mat-autocomplete> 
+                                       </mat-form-field>
+                                    </div>
+                                    </div>
+                                     
+                                 </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                        <div class="col-sm-3" style="margin-top: 1%;">
+                                            <h3>Peso(Kg):</h3>
+                                       </div>
+                                       <div class="col-sm-4" >
+                                        <mat-form-field  appearance="outline" class="width-select">
+                                            <mat-label>
+                                                Kg
+                                            </mat-label>
+                                            <input matInput style="text-align: center;" maxlength="2" formControlName="peso" name="peso" DirectivaNumeros>
+                                          </mat-form-field>
+                                   </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                        <div class="col-sm-3" style="margin-top: 1%;">
+                                            <h3>Talla(cm):</h3>
+                                       </div>
+                                       <div class="col-sm-4" >
+                                        <mat-form-field  appearance="outline" class="width-select">
+                                            <mat-label>
+                                                cm
+                                            </mat-label>
+                                            <input matInput style="text-align: center;" maxlength="3" formControlName="talla" name="talla" DirectivaNumeros>
+                                          </mat-form-field>
+                                         </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-12" >
+                                    <div class="row">
+                                        <div class="col-sm-3" style="margin-top: 1%;">
+                                            <h3> Cuantas comidas tienen al día:</h3>
+                                       </div>
+                                       <div class="col-sm-4">
+                                        <mat-form-field  appearance="outline" class="width-select">
+                                            <mat-label>
+                                                Cuantas comidas tienen al día
+                                            </mat-label>
+                                            <input matInput style="text-align: center;" maxlength="1" formControlName="comidasAlDia" name="comidasAlDia" DirectivaNumeros >
+                                          </mat-form-field>
+                                   </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <h3>
+                                                Tuvo visitas al centro de salud o médico en el último año:
+                                            </h3>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <mat-radio-group formControlName="visitaMedico">
+                                                <mat-radio-button value="1">Si</mat-radio-button>
+                                                <mat-radio-button value="0"  style="margin-left: 10px;">No</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button mat-flat-button color="primary" [disabled]="!frmRegistroAsistencia.valid"
+                                    style="background-color: #0d47a1;" 
+                                    (click)="guardarRegistro()">Guardar</button>
+                                </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "fire" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>

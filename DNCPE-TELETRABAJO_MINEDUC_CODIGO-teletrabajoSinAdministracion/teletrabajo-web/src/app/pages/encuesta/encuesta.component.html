@@ -1,0 +1,133 @@
+<form name="formEncuesta" role="form"  novalidate>  
+  <div class="main-content" *ngIf="!autorizadoCompletarEncuesta">
+    <div class="card card-body">
+      <div class="alert-warning-inspinia">
+        <b>Estimado usuario, no se encuentra habilitado para completar la encuesta.</b>
+      </div>
+    </div>    
+  </div>  
+  <div class="main-content" *ngIf="autorizadoCompletarEncuesta">
+      <div class="container-fluid">
+        <div class="card">          
+          <div class="alert-info-inspinia">
+            
+            <h4><i class="fa fa-line-chart"></i>&nbsp;&nbsp;<b>{{nombreEncuesta}}</b></h4>
+            
+            <span style="font-size: 13px;">{{descripcionEncuesta}}</span>
+          </div>
+          <div class="card-body">            
+            <div class="row">
+              <div class="col">
+                <br/>
+                <div *ngIf="!existeEncuestaParametrizada">
+                  <div class="alert-warning-inspinia">
+                    <small> No existen preguntas cargadas en la encuesta.</small>
+                  </div>
+                </div>
+                <div *ngIf="existeEncuestaParametrizada">
+                  <div *ngFor="let pregunta of preguntas; let i = index" style="margin-bottom: 30px;">                  
+                  <label [class]="pregunta.preguntaDeshabilitada ? 'MuiTypography-disabled' : 'MuiTypography-h6'">{{i + 1}}. {{pregunta.nombre}}</label>                   
+                  <div *ngIf="pregunta.opcionesPregunta == null">                                                   
+                    <div [ngSwitch]="pregunta.nemonico" >
+                      <mat-form-field *ngSwitchCase="'INT'" style="width: 35%;">
+                        <input matInput                      
+                        id="valorEntero{{pregunta.codItemCatalogo}}"                                                                
+                        name="valorEntero{{pregunta.codItemCatalogo}}"
+                        [(ngModel)]="pregunta.respuesta.valorEntero"                                  
+                        placeholder="Respuesta en número entero entre {{pregunta.valorMinimo}} y {{pregunta.valorMaximo}}. Ejemplo: 124" 
+                        type="number"                                         
+                        required                     
+                        class="color-inputs"
+                        [disabled]="pregunta.preguntaDeshabilitada"
+                        (input)="validacionesPreguntas(pregunta)">                     
+                        <mat-error *ngIf="pregunta.sinRespuesta" class="error-message">Campo obligatorio</mat-error>                                                                                                           
+                      </mat-form-field>                    
+                      <mat-form-field *ngSwitchCase="'TXT'">
+                        <textarea matInput                      
+                        id="valorTexto{{pregunta.codItemCatalogo}}"
+                        name="valorTexto{{pregunta.codItemCatalogo}}"
+                        [(ngModel)]="pregunta.respuesta.valorTexto" 
+                        type="text"
+                        maxlength="500"              
+                        placeholder="Digite su respuesta..." 
+                        required
+                        class="color-inputs"
+                        [disabled]="pregunta.preguntaDeshabilitada"
+                        (input)="validacionesPreguntas(pregunta)">
+                      </textarea>
+                      <mat-error *ngIf="pregunta.sinRespuesta" class="error-message">Campo obligatorio</mat-error>                       
+                      </mat-form-field>
+                      <mat-form-field *ngSwitchCase="'DEC'" style="width: 35%;">
+                        <input matInput                      
+                        id="valorDecimal{{pregunta.codItemCatalogo}}"                       
+                        name="valorEntero{{pregunta.codItemCatalogo}}"
+                        [(ngModel)]="pregunta.respuesta.valorDecimal"
+                        type="number"              
+                        placeholder="Respuesta en número decimal entre {{pregunta.valorMinimo}} y {{pregunta.valorMaximo}}. Ejemplo: 12.57"
+                        required
+                        class="color-inputs"
+                        [disabled]="pregunta.preguntaDeshabilitada"
+                        (input)="validacionesPreguntas(pregunta)">
+                        <mat-error *ngIf="pregunta.sinRespuesta" class="error-message">Campo obligatorio</mat-error>                      
+                      </mat-form-field>
+                      <label *ngIf="pregunta.valorInvalido" class="error-message mat-error"><small>{{pregunta.mensajeInvalido}}</small></label> 
+                    </div>
+                    
+                  </div>
+                    <div *ngIf="pregunta.opcionesPregunta != null"> 
+                      <mat-radio-group *ngIf="pregunta.nemonico == 'OPC'"
+                      id="opcionesGroup{{pregunta.codItemCatalogo}}"
+                      name="opcionesGroup{{pregunta.codItemCatalogo}}" 
+                      aria-labelledby="example-radio-group-label"
+                      class="example-radio-group"
+                      [(ngModel)]="pregunta.respuesta.valorOpcion"
+                      [disabled]="pregunta.preguntaDeshabilitada"
+                      required>
+                        <mat-radio-button *ngFor="let opcion of pregunta.opcionesPregunta"
+                        [value]="opcion.codItemCatalogo"  style="margin: 10px"
+                        (input)="validacionesPreguntas(opcion)">
+                          {{opcion.nombre}}
+                        </mat-radio-button> 
+                        <mat-error *ngIf="pregunta.sinRespuesta" class="error-message">Campo obligatorio</mat-error>                    
+                      </mat-radio-group>
+                      
+                      <mat-form-field  *ngIf="pregunta.nemonico == 'MULT'">                        
+                        <mat-select appearance="fill"
+                        id="opcionMultiple{{pregunta.codItemCatalogo}}"
+                        name="opcionMultiple{{pregunta.codItemCatalogo}}"  
+                        [(ngModel)]="pregunta.codigosRespuestasOpcMultiple"
+                        [disabled]="pregunta.preguntaDeshabilitada"
+                        placeholder="Seleccione una o varias opciones"                        
+                        required
+                        multiple>
+                          <mat-option *ngFor="let opcion of pregunta.opcionesPregunta" 
+                          [value]="opcion.codItemCatalogo"
+                          (input)="validacionesPreguntas(opcion)">
+                            {{opcion.nombre}}
+                          </mat-option>                         
+                        </mat-select>
+                        <mat-error *ngIf="pregunta.sinRespuesta" class="error-message">Campo obligatorio</mat-error>
+                      </mat-form-field>
+                    </div>                    
+                    <div class="hr-line-dashed"></div>                                
+                  </div>                                                     
+                </div>               
+              </div>            
+            </div>                        
+          </div>
+          <br />
+        </div>      
+        <div style="text-align: center;" *ngIf="existeEncuestaParametrizada">
+          <button mat-button class="btn btn-primary btn-round" 
+          style="margin-right: 10px;"
+          (click)="listaEncuestas()"
+          >Listar encuestas</button>
+          <button mat-button type="submit" class="btn btn-info btn-round" (click)="enviarEncuesta()" [disabled]="bloquearBotonGuardarEncuesta">            
+            <span *ngIf="estadoEncuesta === 'E'">Guardar encuesta</span>                            
+            <span *ngIf="estadoEncuesta === 'P'">Confirmar encuesta</span>
+            <span *ngIf="estadoEncuesta === 'C'">Actualizar encuesta</span>
+          </button>              
+        </div>
+      </div>
+  </div>
+</form>

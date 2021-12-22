@@ -1,0 +1,73 @@
+<br>
+<form [formGroup]="fechasForm" (ngSubmit)="onSubmit()">
+<div class="contenedor">
+  <h1>Fechas Titulación</h1>
+  
+  <mat-form-field>
+    <mat-label>Año Lectivo</mat-label>
+    <mat-select formControlName="codRegAniLec">
+      <mat-option *ngFor="let anioLectivoSeleccionada of listaAnioLectivo | async"
+      [value]="anioLectivoSeleccionada.codigo">
+          {{anioLectivoSeleccionada.descripcion +" " + anioLectivoSeleccionada.anioInicio+"-"+anioLectivoSeleccionada.anioFin}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+<br>
+
+  <mat-form-field>
+      <mat-label>Tipo Educación</mat-label>
+      <mat-select formControlName="codTipoEducacion">
+        <mat-option *ngFor="let tipoEducacionSeleccionada of listaTipoEducacion | async"
+        [value]="tipoEducacionSeleccionada.codigo">
+            {{tipoEducacionSeleccionada.descripcion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Fecha Inicio General</mat-label>
+      <input formControlName="ftiInicioGeneral" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Fecha Fin General</mat-label>
+      <input formControlName="ftiFinGeneral" matInput [matDatepicker]="picker1">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Fecha Inicio Exonerado</mat-label>
+      <input formControlName="ftiInicioExonerado" matInput [matDatepicker]="picker2">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Fecha Fin Exonerado</mat-label>
+      <input formControlName="ftiFinExonerado" matInput [matDatepicker]="picker3">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+    <br>
+
+  <mat-checkbox  formControlName="ftiEstado" [formControl]="fechasFormControl" class="example-margin">
+    Activo
+  </mat-checkbox>
+  <br>
+
+  <div class="col-sm-4">   
+      <button mat-raised-button color="primary">Guardar</button>    
+  </div>
+  <br> 
+  <router-outlet></router-outlet>
+</div>
+</form>
+
+

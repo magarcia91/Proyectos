@@ -1,0 +1,64 @@
+<br>
+<form [formGroup]="ponderacionForm" (ngSubmit)="onSubmit()">
+<div class="contenedor">
+  <h1>Ponderación Titulación</h1>
+  
+  <mat-form-field>
+    <mat-label>Año Lectivo</mat-label>
+    <mat-select formControlName="codRegAniLec">
+      <mat-option *ngFor="let anioLectivoSeleccionada of listaAnioLectivo | async"
+      [value]="anioLectivoSeleccionada.codigo">
+          {{anioLectivoSeleccionada.descripcion +" " + anioLectivoSeleccionada.anioInicio+"-"+anioLectivoSeleccionada.anioFin}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+<br>
+
+  <mat-form-field>
+      <mat-label>Tipo Educación</mat-label>
+      <mat-select formControlName="codTipoEducacion">
+        <mat-option *ngFor="let tipoEducacionSeleccionada of listaTipoEducacion | async"
+        [value]="tipoEducacionSeleccionada.codigo">
+            {{tipoEducacionSeleccionada.descripcion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    
+  <mat-form-field>
+    <mat-label>Denominación</mat-label>
+    <input type="text" formControlName="mcaDenominacion" matInput [formControl]="ponderacionFormControl" placeholder="">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+      <mat-label>Porcentaje %</mat-label>
+      <input type="text" formControlName="mcaPorcentaje" matInput [formControl]="ponderacionFormControl" placeholder="">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+      <mat-label>Rango Nota MIN=1.00</mat-label>
+      <input type="text" formControlName="mcaDesde" matInput [formControl]="ponderacionFormControl" placeholder="Formato 99.99">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+      <mat-label>Rango Nota MAX=10.0</mat-label>
+      <input type="text" formControlName="mcaHasta" matInput [formControl]="ponderacionFormControl" placeholder="Formato 99.99">
+  </mat-form-field>
+  <br>
+  
+  <mat-checkbox  formControlName="mcaEstado" [formControl]="ponderacionFormControl" class="example-margin">
+    Activo
+  </mat-checkbox>
+  <br>
+
+  <div class="col-sm-4">   
+      <button mat-raised-button color="primary">Guardar</button>    
+  </div>
+  <br> 
+  <router-outlet></router-outlet>
+</div>
+</form>
+
+

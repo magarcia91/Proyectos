@@ -1,0 +1,16 @@
+<div *ngIf="usuario && !cargando; else showLogin">
+    <router-outlet></router-outlet>
+<!--     <h1>Hello {{ usuario.email }}!</h1>
+    <button (click)="logout()">Logout</button> -->
+</div>
+<ng-template #showLogin>
+    <div *ngIf="cargando" class="text-center">
+        <!-- cargando... -->
+        <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div *ngIf="!cargando">
+        <!-- <p>Please login.</p>
+        <button (click)="login()">Login with Google</button> -->
+        <app-login></app-login>
+    </div>
+</ng-template>

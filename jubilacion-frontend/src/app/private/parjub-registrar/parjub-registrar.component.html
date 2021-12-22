@@ -1,0 +1,37 @@
+<br>
+<h1 style="text-align: center;">Ingreso de Datos Inscripciones</h1>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Tipo Jubilacion</label>
+      <input type="text" class="form-control" id="partipojubilacion" required [(ngModel)]="parjub.partipojubilacion" name="firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Tipo Discapacidad</label>
+      <input type="text" class="form-control" id="partipodiscapacidad" required [(ngModel)]="parjub.partipodiscapacidad" name="lastName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Edad</label>
+      <input type="text" class="form-control" id="paredad" required [(ngModel)]="parjub.paredad" name="paredad">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Tiempo Servicio</label>
+      <input type="text" class="form-control" id="paredad" required [(ngModel)]="parjub.partiemposervicio" name="partiemposervicio">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Min Aportaciones</label>
+      <input type="text" class="form-control" id="paredad" required [(ngModel)]="parjub.parminaportaciones" name="parminaportaciones">
+    </div>
+
+    <button type="submit" class="btn btn-info">Registrar</button>
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h4 align="center">Datos ingresados exitosamente!!!</h4>
+  <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+</div>

@@ -1,0 +1,81 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="alert alert-success">
+          <span>
+              <h4><strong>Datos Actuales</strong></h4>
+          </span>
+      </div>
+        <div class="card-body" style="text-align: center;">
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput name="oferta" placeholder="Oferta" [value]="cabecera.oferta" [disabled]="true">
+            </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput name="regimen" placeholder="Regimen" [value]="cabecera.regimen" [disabled]="true">
+            </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput name="institucion" placeholder="Institución" [value]="cabecera.institucion" [disabled]="true">
+            </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput name="cargo" placeholder="Cargo" [value]="cabecera.cargo" [disabled]="true">
+            </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="alert alert-info">
+          <span>
+              <h3><strong>Registro de Actividades</strong></h3>
+          </span>
+      </div>
+        <div class="card-body" style="text-align: center;">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 20%;"><strong>Semana</strong></th>
+                  <th scope="col"><strong>Actividades</strong></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let semana of semanas">
+                  <th scope="row">{{semana.fechaInicio | date : 'dd/MM/yyyy'}} - {{semana.fechaFin | date : 'dd/MM/yyyy'}}</th>
+                  
+                  <td style="text-align: left;">                    
+                    <div *ngIf="semana.actividades.length > 0">
+                      <div>
+                        <li *ngFor="let actividad of semana.actividades">{{actividad.nombre}}</li>
+                      </div>                      
+                    </div>
+                    <div style="margin-top: 10px; text-align: center;">
+                      <button mat-button type="button" class="btn btn-success btn-round" (click)="newTask(semana)" *ngIf="semana.actividades.length == 0" style="font-size: 11px;" >Registrar actividades de teletrabajo</button>
+                      &#160;
+                      <button mat-button type="button" class="btn btn-info btn-round" (click)="registrarInactivarActividades(semana,false)" *ngIf="semana.actividades.length == 0" style="font-size: 11px;">Registrar trabajo presencial</button>
+                      &#160;
+                      <button mat-button type="button" class="btn btn-warning btn-round" (click)="newTask(semana)" *ngIf="semana.actividades.length > 0 && !semana.esTrabajoPresencial" style="font-size: 11px;">Editar actividades</button>
+                      &#160;
+                      <button mat-button type="button" class="btn btn-danger btn-round" (click)="registrarInactivarActividades(semana,true)" *ngIf="semana.actividades.length > 0" style="font-size: 11px;">Inactivar actividades</button>
+                    </div>
+                  </td>
+                                
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+</div>

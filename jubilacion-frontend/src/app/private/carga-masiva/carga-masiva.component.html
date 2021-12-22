@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <mat-card>
+                <mat-card-header>
+                    
+                    <mat-card-title>Carga Masiva</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                   <form >
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Registro</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div class="col-sm-12">
+                                    <mat-label style="font-weight: bold;">Cargar Estudiantes: </mat-label>
+                                    <input #myInput id="singleFileRegistro" type="file"  (change)="onFileChange($event)" accept=".xlsm"/>
+                               
+                                    <button mat-fab color="primary" (click)="enviarInformacion()">
+                                        <mat-icon>upload</mat-icon>
+                                    </button>
+                                    <button mat-fab color="warn" (click)="reset()" >
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                    
+                    <mat-card style="margin-top: 10px;">
+                        <mat-card-header>
+                            <mat-card-title>Encuestas</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-card>
+                                <mat-card-content>
+                                    <div class="col-sm-12">
+                                        <mat-label style="font-weight: bold;">Cargar Encuestas Socioemocional: </mat-label>
+                                        <input #myInputSocio id="singleFileSocio" type="file"  (change)="onFileChangeSocio($event)" accept=".xlsm"/>
+                                   
+                                        <button mat-fab color="primary" (click)="enviarInformacionSocio()">
+                                            <mat-icon>upload</mat-icon>
+                                        </button>
+                                        <button mat-fab color="warn" (click)="resetSocio()" >
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                </div>
+                                </mat-card-content>
+                            </mat-card>
+                            
+                            <mat-card style="margin-top: 10px;">
+                                <mat-card-content>
+                                    <div class="col-sm-12">
+                                        <mat-label style="font-weight: bold;">Cargar Encuestas Pedagógica: </mat-label>
+                                        <input #myInputPedagogico id="singleFilePedagogico" type="file"  (change)="onFileChangePedagogico($event)" accept=".xlsm"/>
+                                   
+                                        <button mat-fab color="primary" (click)="enviarInformacionPedagogico()">
+                                            <mat-icon>upload</mat-icon>
+                                        </button>
+                                        <button mat-fab color="warn" (click)="resetPedagogico()" >
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                     </div>
+                                </mat-card-content>
+                            </mat-card>
+                            
+                        </mat-card-content>
+                    </mat-card>
+                  
+                   </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "fire" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>

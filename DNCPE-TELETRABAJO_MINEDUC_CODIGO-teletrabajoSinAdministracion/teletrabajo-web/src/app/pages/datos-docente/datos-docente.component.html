@@ -1,0 +1,320 @@
+<form [formGroup]="formularioUsuario" novalidate (ngSubmit)="salvarActualizarCabecera(formularioUsuario)">
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="alert alert-success">
+        <h4>Información personal</h4>
+        <small> Los campos con * son obligatorios</small>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Número de identificación:"
+                [value]="identificacionUsuario" [disabled]="true">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombres:" [value]="nombresUsuario"
+                [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">   
+              <input matInput id="correoInstitucional" 
+              name="correoInstitucional"
+              formControlName="correoInstitucional" 
+              type="text"              
+              placeholder="Correo electrónico institucional:" >
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.correoInstitucional">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('correoInstitucional').hasError(validation.type) && (formularioUsuario.get('correoInstitucional').dirty || formularioUsuario.get('correoInstitucional').touched)">{{validation.message}}</mat-error>
+              </mat-error>                         
+            </mat-form-field>        
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">              
+              <input matInput id="correoPersonal" 
+              name="correoPersonal"
+              formControlName="correoPersonal" 
+              type="text"              
+              placeholder="*Correo electrónico personal:" > 
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.correoPersonal">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('correoPersonal').hasError(validation.type) && (formularioUsuario.get('correoPersonal').dirty || formularioUsuario.get('correoPersonal').touched)">{{validation.message}}</mat-error>
+              </mat-error> 
+            </mat-form-field>
+          </div>
+         
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput id="celular"  maxlength="10"
+              name="celular"
+              formControlName="celular" 
+              type="text"              
+              placeholder="*Celular:" 
+              inputmode="numeric" digitOnly>
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.celular">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('celular').hasError(validation.type) && (formularioUsuario.get('celular').dirty || formularioUsuario.get('celular').touched)">{{validation.message}}</mat-error>
+              </mat-error>              
+            </mat-form-field>
+          </div>
+          <div class="col">            
+          </div>
+        </div>      
+      </div>
+
+      <br />
+    </div>
+
+    <div class="card" >
+      <div class="alert alert-success">
+        <h4>Datos institucionales</h4>
+        <small> Los campos con * son obligatorios</small>
+      </div>
+      <div class="card-body">        
+        <div class="row">
+          <div class="col">
+            <mat-form-field *ngIf="habilitarSeleccionZonDisPro">
+              <mat-label>*Zona: </mat-label>
+              <mat-select 
+              id="idZona"
+              name="idZona"
+              formControlName="idZona"              
+              (selectionChange)="listarProvincias($event.value)">
+                <mat-option *ngFor="let zona of zonas" [value]="zona.codZona">
+                  {{zona.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.idZona">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('idZona').hasError(validation.type) && (formularioUsuario.get('idZona').dirty || formularioUsuario.get('idZona').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width" *ngIf="!habilitarSeleccionZonDisPro">
+              <input matInput placeholder="Zona:"
+                [value]="institucionEducativaLabel == undefined? '---' :institucionEducativaLabel.telDistrito.telProvincia.nombre"
+                [disabled]="true">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field *ngIf="habilitarSeleccionZonDisPro">
+              <mat-label>*Provincia: </mat-label>
+              <mat-select 
+              id="idProvincia"
+              name="idProvincia"
+              formControlName="idProvincia"              
+              (selectionChange)="listarDistritos($event.value)">
+                <mat-option *ngFor="let provincia of provincias" [value]="provincia.codProvincia">
+                  {{provincia.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.idProvincia">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('idProvincia').hasError(validation.type) && (formularioUsuario.get('idProvincia').dirty || formularioUsuario.get('idProvincia').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" *ngIf="!habilitarSeleccionZonDisPro">
+              <input matInput placeholder="Provincia:"
+                [value]="institucionEducativaLabel == undefined? '---' :institucionEducativaLabel.telDistrito.telProvincia.nombre"
+                [disabled]="true">
+            </mat-form-field>
+
+          </div>
+          <div class="col">
+            <mat-form-field *ngIf="habilitarSeleccionZonDisPro">
+              <mat-label>*Distrito: </mat-label>
+              <mat-select 
+              id="idDistrito"
+              name="idDistrito"
+              formControlName="idDistrito"                            
+              (selectionChange)="listarInstitucionesEducativasWeb($event.value)">
+                <mat-option *ngFor="let distri of distritos" [value]="distri.codDistrito">
+                  {{distri.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.idDistrito">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('idDistrito').hasError(validation.type) && (formularioUsuario.get('idDistrito').dirty || formularioUsuario.get('idDistrito').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width" *ngIf="!habilitarSeleccionZonDisPro">
+              <input matInput placeholder="Distrito:"
+                [value]="institucionEducativaLabel == undefined? '---' :institucionEducativaLabel.telDistrito.nombre"
+                [disabled]="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">          
+          <div class="col">
+            <mat-form-field>
+              <mat-label>*Oferta educativa: </mat-label>
+              <mat-select 
+              id="ofertaSeleccionada"
+              name="ofertaSeleccionada"
+              formControlName="ofertaSeleccionada"               
+                (selectionChange)="selectOferta($event.value)">                
+                <mat-option *ngFor="let oferta of ofertasEducativas" [value]="oferta">
+                  {{oferta.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.ofertaSeleccionada">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('ofertaSeleccionada').hasError(validation.type) && (formularioUsuario.get('ofertaSeleccionada').dirty || formularioUsuario.get('ofertaSeleccionada').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>          
+                
+          <div class="col" *ngIf="habilitaFunciones">
+            <mat-form-field>
+              <mat-label>*Función o cargo: </mat-label>
+              <mat-select 
+                id="cargoSeleccionado"
+                name="cargoSeleccionado"
+                formControlName="cargoSeleccionado"
+                (selectionChange)="selectCargoFuncion($event.value)">
+                <mat-option *ngFor="let funcion of funcionesUsuario" [value]="funcion">
+                  {{funcion.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.cargoSeleccionado">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('cargoSeleccionado').hasError(validation.type) && (formularioUsuario.get('cargoSeleccionado').dirty || formularioUsuario.get('cargoSeleccionado').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>                            
+        </div>
+        <div class="row">
+          <div class="col" *ngIf="existeInstitucion">
+            <mat-form-field>
+              <mat-label>*Institución educativa: </mat-label>
+              <mat-select 
+              id="institucionEducativa"
+              name="institucionEducativa"
+              formControlName="institucionEducativa"
+              (selectionChange)="selectInstitucionEducativa($event.value)">
+                <mat-option *ngFor="let institucion of institucionesEducativas" [value]="institucion">
+                  {{institucion.amie}} - {{institucion.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.institucionEducativa">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('institucionEducativa').hasError(validation.type) && (formularioUsuario.get('institucionEducativa').dirty || formularioUsuario.get('institucionEducativa').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>           
+
+          </div>
+          <div class="col" *ngIf="existeInstitucion">
+            <mat-form-field>
+              <mat-label>*Régimen de la institución educativa: </mat-label>
+              <mat-select 
+              id="regimen"
+              name="regimen"
+              formControlName="regimen">
+                <mat-option *ngFor="let regimenVar of regimenes" [value]="regimenVar">
+                  {{regimenVar.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngFor="let validation of mensajes_validacion_formulario.regimen">
+                <mat-error class="error-message" *ngIf="formularioUsuario.get('regimen').hasError(validation.type) && (formularioUsuario.get('regimen').dirty || formularioUsuario.get('regimen').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>         
+        </div>
+      </div>
+
+      <br />
+    </div>
+
+    <div class="card" *ngIf="nivelesSubniveles.length!=0 && (existeInstitucion || habilitarNiveles)">
+      <div class="alert alert-success">
+        <h4>Datos de niveles, grados y asignaturas impartidas</h4>
+        <small> Los campos con * son obligatorios</small>
+      </div>
+      <div class="card-body">        
+        <div class="row">
+          <div class="col" *ngIf="nivelesSubniveles.length!=0">
+            <label class="label-material ng-star-inserted">*Niveles o subniveles:</label><br />            
+            <div class="row" *ngFor="let nivel of nivelesSubniveles">
+              <div class="col">
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" (change)="checkChangeNivel($event, nivel)" class="form-check-label"
+                    [checked]="nivel.check">{{nivel.nombre}}</mat-checkbox>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="col" *ngIf="grados.length!=0">
+            <label class="label-material ng-star-inserted">*Grados y/o cursos:</label><br />
+            <div class="row" *ngFor="let grado of grados">
+              <div class="col">
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" (change)="checkChangeGrado($event, grado)"
+                    [checked]="grado.check">{{grado.nombre}}</mat-checkbox>
+                </section>
+              </div>
+            </div>
+          </div>          
+        </div>
+        <div class="row">
+          <div class="col" *ngIf="areasAsignaturas.length!=0">
+            <br/>
+            <label class="label-material ng-star-inserted">*Áreas y asignaturas:</label><br />
+            <div>
+              <section class="example-section">
+                <mat-checkbox class="example-margin" 
+                id="seleccionarTodasAreasAsignaturas"
+                name="seleccionarTodasAreasAsignaturas"
+                formControlName="seleccionarTodasAreasAsignaturas"
+                (change)="checkAllAreaAsignaturas($event)"><label class="style-label-check"><em>Marcar todas las áreas y asignaturas</em></label></mat-checkbox>
+              </section>
+            </div>
+            <div class="margin-div-asignatura">
+              <div class="row" *ngFor="let area of areasAsignaturas">
+                <div class="col">
+                  <section class="example-section">
+                    <mat-checkbox class="example-margin" (change)="checkChangeAreaAsignatura($event, area)"
+                      [checked]="area.check">{{area.nombre}}({{area.nombrePadre}})</mat-checkbox>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <br />
+    </div>
+
+    <div class="card" *ngIf="distritosZona.length!=0 && habilitarNuevosDistritos">
+      <div class="alert alert-success">
+        <h4>Datos de distritos donde labora</h4>
+        <small> Los campos con * son obligatorios</small>
+      </div>
+      <div class="card-body">        
+        <div class="row">
+          <div class="col" *ngIf="distritosZona.length!=0">
+            <label class="label-material ng-star-inserted">*Distritos:</label><br />            
+            <div class="row" *ngFor="let distrito of distritosZona">
+              <div class="col">
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" class="form-check-label" (change)="checkChangeDistritos($event, distrito)"
+                    [checked]="distrito.check">{{distrito.nombre}}</mat-checkbox>
+                </section>
+              </div>
+            </div>
+          </div>                  
+        </div>        
+      </div>
+
+      <br />
+    </div>
+
+    <div style="text-align: center;">
+      <button mat-button type="submit" class="btn btn-success btn-round" >{{guardarActualizarFormulario?'Actualizar información':'Guardar información'}}</button>      
+    </div>
+
+  </div>
+
+</div>
+</form>
